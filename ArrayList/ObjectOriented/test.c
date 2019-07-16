@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include "ArrayList.h"
-void* printArrayListInt(void* obj, void* data) {
+void* printArrayListString(void* obj, void* data) {
     struct ArrayList* self = obj;
 
     if (self == NULL) {
@@ -10,10 +10,11 @@ void* printArrayListInt(void* obj, void* data) {
     }
 
     int size = self->getSize(self);
-
+    printf("{");
     for(int i = 0; i < size; i++) {
-        printf("%d, ", ((int*)self->array)[i]);
+        printf("%s,", ((char**)self->array)[i]);
     }
+    printf("}\n");
 
     return NULL;
 }
@@ -33,7 +34,7 @@ void* sumInt(void* obj, void* data) {
     int size = self->getSize(self);
 
     for(int i = 0; i < size; i++) {
-        *sum += ((int*)self->array)[i];
+        *sum += strlen(((char**)self->array)[i]);
     }
     printf("\n");
 
@@ -41,8 +42,8 @@ void* sumInt(void* obj, void* data) {
 }
 
 int main(int argc, char **argv) {
-    int f = 3, s = 44;
-    int arr[] = {1, 2, 3, 4, 5};
+    char* f = "3", *s = "44";
+    char* arr[] = {"jednen", "dwa", "trzy", "cztery", "piec"};
 
     struct ArrayList* test = getArrayList(sizeof(int), 1);
 
@@ -56,16 +57,14 @@ int main(int argc, char **argv) {
     test->addElement(test, &s);
     test->addElement(test, &s);
     test->setElement(test, 0, &f);
-    int* ff = ((int*)test->getElement(test, 1));
     int sum = 0;
 
-    printf("%d\n", *ff);
-    test->forEach(test, printArrayListInt, NULL);
+    test->forEach(test, printArrayListString, NULL);
     test->forEach(test, sumInt, &sum);
-    printf("%d \n", sum);
-    int* tab = test->toArray(test);
+    printf("Number of characters: %d \n", sum);
+    char** tab = test->toArray(test);
     for(int i = 0; i < test->getSize(test); i++) {
-        printf("%d,  ", tab[i]);
+        printf("%s,  ", tab[i]);
     }
     free(tab);
     test->destroyArrayList(test);
