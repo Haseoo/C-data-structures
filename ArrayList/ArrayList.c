@@ -85,7 +85,16 @@ int setElement(struct ArrayList* self, size_t position, void* value) {
 }
 
 void *forEach(struct ArrayList* self, forEachFuction function, void* data) {
-    return function(self, data);
+    if (self == NULL) {
+        return NULL;
+    }
+
+    int iterations = getSize(self);
+    for (int i = 0; i < iterations; i++) {
+        function(self->array + (i * self->elementSize), data);
+    }
+
+    return data;
 }
 
 

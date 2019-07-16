@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef void* (*forEachFuction)(void*, void*);
+typedef void (*forEachFuction)(void*, void*);
 
 struct ArrayList {
     void* array;

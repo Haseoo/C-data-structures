@@ -13,7 +13,7 @@ struct ArrayList {
     int elementSize;
 };
 
-typedef void* (*forEachFuction)(struct ArrayList*, void*);
+typedef void (*forEachFuction)(struct ArrayList*, void*);
 
 struct ArrayList* getArrayList(int , int);
 void destroyArrayList(struct ArrayList* );

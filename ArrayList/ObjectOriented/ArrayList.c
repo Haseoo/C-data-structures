@@ -107,7 +107,11 @@ void* ArrayList_forEach(void* obj, forEachFuction function, void* data) {
     if (self == NULL) {
         return NULL;
     }
-    return function(self, data);
+    int iterations = self->getSize(self);
+    for (int i = 0; i < iterations; i++) {
+        function(self->array + (i * self->elementSize), data);
+    }
+    return data;
 }
 
 
